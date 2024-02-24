@@ -36,7 +36,7 @@ type Client struct {
 	baseClient
 }
 type errorHandler interface {
-	NewError(ctx context.Context, err error) *ErrorStatusCode
+	NewError(ctx context.Context, err error) *ErrorResponseStatusCode
 }
 
 var _ Handler = struct {

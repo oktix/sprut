@@ -6,214 +6,77 @@ import (
 	"fmt"
 )
 
-func (s *ErrorStatusCode) Error() string {
+func (s *ErrorResponseStatusCode) Error() string {
 	return fmt.Sprintf("code %d: %+v", s.StatusCode, s.Response)
 }
 
+// Default error object.
 // Ref: #/components/schemas/Error
 type Error struct {
-	Code    OptInt32  `json:"code"`
-	Message OptString `json:"message"`
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
 }
 
 // GetCode returns the value of Code.
-func (s *Error) GetCode() OptInt32 {
+func (s *Error) GetCode() int64 {
 	return s.Code
 }
 
 // GetMessage returns the value of Message.
-func (s *Error) GetMessage() OptString {
+func (s *Error) GetMessage() string {
 	return s.Message
 }
 
 // SetCode sets the value of Code.
-func (s *Error) SetCode(val OptInt32) {
+func (s *Error) SetCode(val int64) {
 	s.Code = val
 }
 
 // SetMessage sets the value of Message.
-func (s *Error) SetMessage(val OptString) {
+func (s *Error) SetMessage(val string) {
 	s.Message = val
 }
 
-// ErrorStatusCode wraps Error with StatusCode.
-type ErrorStatusCode struct {
+// ErrorResponseStatusCode wraps Error with StatusCode.
+type ErrorResponseStatusCode struct {
 	StatusCode int
 	Response   Error
 }
 
 // GetStatusCode returns the value of StatusCode.
-func (s *ErrorStatusCode) GetStatusCode() int {
+func (s *ErrorResponseStatusCode) GetStatusCode() int {
 	return s.StatusCode
 }
 
 // GetResponse returns the value of Response.
-func (s *ErrorStatusCode) GetResponse() Error {
+func (s *ErrorResponseStatusCode) GetResponse() Error {
 	return s.Response
 }
 
 // SetStatusCode sets the value of StatusCode.
-func (s *ErrorStatusCode) SetStatusCode(val int) {
+func (s *ErrorResponseStatusCode) SetStatusCode(val int) {
 	s.StatusCode = val
 }
 
 // SetResponse sets the value of Response.
-func (s *ErrorStatusCode) SetResponse(val Error) {
+func (s *ErrorResponseStatusCode) SetResponse(val Error) {
 	s.Response = val
 }
 
-func (*ErrorStatusCode) getPingRes() {}
-
-// NewOptBool returns new OptBool with value set to v.
-func NewOptBool(v bool) OptBool {
-	return OptBool{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptBool is optional bool.
-type OptBool struct {
-	Value bool
-	Set   bool
-}
-
-// IsSet returns true if OptBool was set.
-func (o OptBool) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptBool) Reset() {
-	var v bool
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptBool) SetTo(v bool) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptBool) Get() (v bool, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptBool) Or(d bool) bool {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptInt32 returns new OptInt32 with value set to v.
-func NewOptInt32(v int32) OptInt32 {
-	return OptInt32{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptInt32 is optional int32.
-type OptInt32 struct {
-	Value int32
-	Set   bool
-}
-
-// IsSet returns true if OptInt32 was set.
-func (o OptInt32) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptInt32) Reset() {
-	var v int32
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptInt32) SetTo(v int32) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptInt32) Get() (v int32, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptInt32) Or(d int32) int32 {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptString returns new OptString with value set to v.
-func NewOptString(v string) OptString {
-	return OptString{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptString is optional string.
-type OptString struct {
-	Value string
-	Set   bool
-}
-
-// IsSet returns true if OptString was set.
-func (o OptString) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptString) Reset() {
-	var v string
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptString) SetTo(v string) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptString) Get() (v string, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptString) Or(d string) string {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
+func (*ErrorResponseStatusCode) getPingRes() {}
 
 // Ref: #/components/schemas/Pong
 type Pong struct {
-	Pong OptBool `json:"pong"`
+	Pong bool `json:"pong"`
 }
 
 // GetPong returns the value of Pong.
-func (s *Pong) GetPong() OptBool {
+func (s *Pong) GetPong() bool {
 	return s.Pong
 }
 
 // SetPong sets the value of Pong.
-func (s *Pong) SetPong(val OptBool) {
+func (s *Pong) SetPong(val bool) {
 	s.Pong = val
 }
 

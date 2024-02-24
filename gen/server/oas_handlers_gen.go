@@ -92,7 +92,7 @@ func (s *Server) handleGetPingRequest(args [0]string, argsEscaped bool, w http.R
 		response, err = s.h.GetPing(ctx)
 	}
 	if err != nil {
-		if errRes, ok := errors.Into[*ErrorStatusCode](err); ok {
+		if errRes, ok := errors.Into[*ErrorResponseStatusCode](err); ok {
 			if err := encodeErrorResponse(errRes, w, span); err != nil {
 				recordError("Internal", err)
 			}

@@ -82,7 +82,7 @@ func decodeGetPingResponse(resp *http.Response) (res GetPingRes, _ error) {
 				}
 				return res, err
 			}
-			return &ErrorStatusCode{
+			return &ErrorResponseStatusCode{
 				StatusCode: resp.StatusCode,
 				Response:   response,
 			}, nil
@@ -91,7 +91,7 @@ func decodeGetPingResponse(resp *http.Response) (res GetPingRes, _ error) {
 		}
 	}
 	// Convenient error response.
-	defRes, err := func() (res *ErrorStatusCode, err error) {
+	defRes, err := func() (res *ErrorResponseStatusCode, err error) {
 		ct, _, err := mime.ParseMediaType(resp.Header.Get("Content-Type"))
 		if err != nil {
 			return res, errors.Wrap(err, "parse media type")
@@ -121,7 +121,7 @@ func decodeGetPingResponse(resp *http.Response) (res GetPingRes, _ error) {
 				}
 				return res, err
 			}
-			return &ErrorStatusCode{
+			return &ErrorResponseStatusCode{
 				StatusCode: resp.StatusCode,
 				Response:   response,
 			}, nil

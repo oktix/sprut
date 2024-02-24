@@ -28,7 +28,7 @@ func encodeGetPingResponse(response GetPingRes, w http.ResponseWriter, span trac
 
 		return nil
 
-	case *ErrorStatusCode:
+	case *ErrorResponseStatusCode:
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		code := response.StatusCode
 		if code == 0 {
@@ -58,7 +58,7 @@ func encodeGetPingResponse(response GetPingRes, w http.ResponseWriter, span trac
 	}
 }
 
-func encodeErrorResponse(response *ErrorStatusCode, w http.ResponseWriter, span trace.Span) error {
+func encodeErrorResponse(response *ErrorResponseStatusCode, w http.ResponseWriter, span trace.Span) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	code := response.StatusCode
 	if code == 0 {

@@ -28,6 +28,8 @@ components:
       properties:
         pong:
           type: boolean
+      required:
+        - pong
 
     Error:
       description: default error object

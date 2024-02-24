@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+	"sprut/internal/service"
+)
 
 func main() {
-	fmt.Println("Hello Spurt")
+	server := service.NewServerImpl()
+	err := http.ListenAndServe("localhost:80", server)
+	if err != nil {
+		fmt.Println("Sprut happened: ", err)
+	}
 }
