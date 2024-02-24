@@ -1,0 +1,58 @@
+openapi: "3.1.0"
+
+info:
+  version: v1.0
+  title: Sprut server api
+
+servers:
+  - url: http://localhost:80
+
+paths:
+  /ping:
+    get:
+      operationId: GetPing
+      summary: Ping endpoint
+      description: Ping endpoint, that ensures your application is up and running
+      responses:
+        200:
+          $ref: "#/components/responses/PingResponse"
+        400:
+          $ref: "#/components/responses/ErrorResponse"
+        default:
+          $ref: "#/components/responses/ErrorResponse"
+
+components:
+  schemas:
+    Pong:
+      type: object
+      properties:
+        pong:
+          type: boolean
+
+    Error:
+      description: default error object
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        message:
+          type: string
+      required:
+        - code
+        - message
+
+  responses:
+    PingResponse:
+      description: ping response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Pong"
+
+    ErrorResponse:
+      description: default error response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
